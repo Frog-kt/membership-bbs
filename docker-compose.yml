@@ -34,3 +34,20 @@ services:
       - 6379:6379
     volumes:
       - "./data/reis:/data"
+
+  # DB
+  postgresql:
+    image: postgres:12
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      DATABASE_HOST: localhost
+    hostname: postgres
+    restart: always
+    user: root
