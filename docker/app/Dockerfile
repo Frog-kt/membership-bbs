@@ -7,4 +7,4 @@ ENV NODE_ENV="development"
 # 作業ディレクトリ作成&設定
 WORKDIR /src
 
-CMD bash -c "npm install && npm install -g nodemon && npm run dev"
+CMD bash -c "npm install -g pnpm && pnpm install && pnpm install -g nodemon && pnpm run dev"
