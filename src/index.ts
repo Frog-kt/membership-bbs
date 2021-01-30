@@ -2,8 +2,11 @@ import express from "express";
 
 const app = express();
 
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
-  res.status(200).send("OK");
+	const message = "Hello World!";
+	res.render("index", { message: message });
 });
 
 app.listen(3000, () => {
