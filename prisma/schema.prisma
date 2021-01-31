@@ -16,6 +16,7 @@ model user {
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
   profile      profile?
+  post         post[]
 }
 
 // ユーザープロフィール
@@ -24,5 +25,15 @@ model profile {
   bio      String
   icon_url String
   user     user   @relation(fields: [user_id], references: [id])
-  user_id   String
+  user_id  String
+}
+
+// 投稿
+model post {
+  id         String   @id @default(cuid())
+  content    String
+  author     user     @relation(fields: [user_id], references: [id])
+  user_id    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
