@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>掲示板：プロフィールの編集 失敗</title>
+</head>
+
+<body>
+  <h1>プロフィールの編集</h1>
+  <p>画像、または入力値が不正です。</p>
+  <form action="/user/profile" method="post" enctype="multipart/form-data">
+    <label for="icon">アイコン</label>
+    <img src="<%= user.profile.icon_url %>" width="100" width="100" alt="img">
+    <br>
+    <input type="file" name="icon" id="icon">
+    <br>
+    <br>
+    <label for="display_name">表示名(3~32文字)</label>
+    <br>
+    <input type="text" name="display_name" id="display_name" value="<%= user.display_name %>">
+    <br>
+    <br>
+    <label for="bio">自己紹介</label>
+    <br>
+    <textarea rows="3" cols="40" name="bio" id="bio"><%= user.profile.bio %></textarea>
+    <br>
+    <br>
+    <input type="submit" value="プロフィールの更新">
+  </form>
+  <br>
+  <button><a href="/user/profile/<%= user.id %>">キャンセル</a></button>
+</body>
+
+</html>

@@ -2,14 +2,40 @@
 <html>
 
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src *;
+   img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
+   style-src  'self' 'unsafe-inline' *">
   <meta charset="utf-8" />
-  <title>index</title>
+  <title>掲示板：トップ</title>
 </head>
 
 <body>
-  <h1>index</h1>
+  <h1>トップページ</h1>
   <!-- コードから渡されたデータを表示-->
-  <p><%= message %></p>
+  <% if (isLogin) { %>
+  <!-- true -->
+  <h2>投稿</h2>
+  <form action="/post" method="post">
+    <textarea rows="3" cols="70" name="content" placeholder="投稿する内容を入力してください"></textarea>
+    <br>
+    <input type="submit" value="投稿">
+  </form>
+  <br>
+  <button><a href="/user/profile/<%= userId %>">マイページ</a></button>
+  <% } else { %>
+  <!-- else -->
+  <p>記事を投稿するにはアカウントが必要です。</p>
+  <button><a href="/login">ログイン</a></button>
+  <button><a href="/signup">新規登録</a></button>
+
+  <% } %>
+  <hr>
+  <h2>投稿一覧</h2>
+  <% posts.forEach(function (value) { %>
+  <p>投稿者：<a href="/user/profile/<%= value.user_id %>"><%= value.author.display_name %></a>　　<%= value.created_at %></p>
+  <p><%= value.content %></p>
+  <br>
+  <% }); %>
 </body>
 
 </html>
