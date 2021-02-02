@@ -69,7 +69,7 @@ router.post("/signup", async (req, res, next) => {
 					create: {
 						bio: "Hello BBS",
 						icon_url:
-							"https://bbs-image.s3.amazonaws.com/image/iconfinder_male3_403019.png",
+							"img/icon/icon.png",
 					},
 				},
 			},
@@ -225,7 +225,7 @@ router.post(
 				"binary"
 			);
 
-			icon_url = `http://localhost:3000/img/icon/${fileName}`;
+			icon_url = `/img/icon/${fileName}`;
 		}
 
 		const user = await prisma.user.update({
