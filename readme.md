@@ -19,3 +19,9 @@
 - nginx による静的コンテンツ配信
 - postgreSQL の使用
 - docker-compose の使用(redis, nginx, node, postgreSQL)
+
+## 使い方
+
+1. ```docker-compose up```
+
+2. access to http://localhost/
