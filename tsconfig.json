@@ -27,5 +27,5 @@
   "exclude": [
     "node_modules"
   ],
-  "files": ["types.d.ts"]
+  "files": ["index.d.ts"]
 }
