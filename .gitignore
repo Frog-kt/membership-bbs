@@ -1,7 +1,6 @@
 /node_modules
 /data
 
-.env
 /prisma/migrations
 /public/img/icon
 /.pnpm-store
