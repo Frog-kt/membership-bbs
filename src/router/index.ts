@@ -69,7 +69,7 @@ router.post("/signup", async (req, res, next) => {
 					create: {
 						bio: "Hello BBS",
 						icon_url:
-							"img/icon/icon.png",
+							"/img/icon/icon.png",
 					},
 				},
 			},
