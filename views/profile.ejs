@@ -11,6 +11,7 @@
   <form action="/user/profile" method="post" enctype="multipart/form-data">
     <label for="icon">アイコン</label>
     <img src="<%= user.profile.icon_url %>" width="100" width="100" alt="img">
+    <img src="<%= value.author.profile.icon_url %>" width="100" width="100" alt="img">
     <br>
     <input type="file" name="icon" id="icon">
     <br>

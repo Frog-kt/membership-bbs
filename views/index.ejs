@@ -32,7 +32,8 @@
   <hr>
   <h2>投稿一覧</h2>
   <% posts.forEach(function (value) { %>
-  <p>投稿者：<a href="/user/profile/<%= value.user_id %>"><%= value.author.display_name %></a>　　<%= value.created_at %></p>
+
+  <p><img src="<%= value.author.profile.icon_url %>" width="40" width="40" alt="img"><a href="/user/profile/<%= value.user_id %>"><%= value.author.display_name %></a>　　<%= value.created_at %></p>
   <p><%= value.content %></p>
   <br>
   <% }); %>

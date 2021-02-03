@@ -20,7 +20,18 @@ const router = Router();
 router.get("/", async (req, res, next) => {
 	const posts = await prisma.post.findMany({
 		orderBy: [{ created_at: "desc" }],
-		include: { author: { select: { display_name: true } } },
+		include: {
+			author: {
+				select: {
+					display_name: true,
+					profile: {
+						select: {
+							icon_url: true,
+						},
+					},
+				},
+			},
+		},
 	});
 
 	let isLogin = false;
@@ -68,8 +79,7 @@ router.post("/signup", async (req, res, next) => {
 				profile: {
 					create: {
 						bio: "Hello BBS",
-						icon_url:
-							"/img/icon/icon.png",
+						icon_url: "/img/icon/icon.png",
 					},
 				},
 			},
