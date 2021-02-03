@@ -1,5 +1,5 @@
 dependencies:
-  aws-sdk: 2.834.0
+  aws-sdk: 2.835.0
   bcryptjs: 2.4.3
   body-parser: 1.19.0
   connect-redis: 5.0.0
@@ -17,11 +17,12 @@ dependencies:
   moment: 2.29.1
   morgan: 1.10.0
   multer: 1.4.2
+  passport-twitter: 1.0.4
   redis: 3.0.2
   uuid: 8.3.2
 devDependencies:
-  '@prisma/cli': 2.15.0
-  '@prisma/client': 2.15.0_@prisma+cli@2.15.0
+  '@prisma/cli': 2.16.0
+  '@prisma/client': 2.16.0
   '@types/bcryptjs': 2.4.2
   '@types/connect-redis': 0.0.16
   '@types/cookie-parser': 1.4.2
@@ -51,40 +52,39 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tFJlT47db0kMqVm3H4nQYgn6Pwg10GTZHb1pwmSiv1K4ks6drQOtfEF5ZnPjkvC+y4/bUPHK+bc87QvLcL+WMw==
-  /@prisma/cli/2.15.0:
+  /@prisma/cli/2.16.0:
     dependencies:
-      '@prisma/engines': 2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54
+      '@prisma/engines': 2.16.0-43.a973e24a4e5194f8fe3301bfa7ff982b24f97c05
     dev: true
     engines:
       node: '>=10.4'
     hasBin: true
     requiresBuild: true
     resolution:
-      integrity: sha512-sF2mgn5oH5fL9/CKxS0tqojf0rK2BKODlEUqL+2s3YZqvJRSt4iFpiyjgajyd0wyTyv1k9LDHTV0yOD1mXDBsA==
-  /@prisma/client/2.15.0_@prisma+cli@2.15.0:
+      integrity: sha512-sgZVHyTN8tC8rneJ17+p8XWoS2bzt1BBADAf2rbvl5sQpVQo7YD4cGZHJS01i+tOlGb05jGAyY5NvuHI5251dw==
+  /@prisma/client/2.16.0:
     dependencies:
-      '@prisma/cli': 2.15.0
-      '@prisma/engines-version': 2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54
+      '@prisma/engines-version': 2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1
     dev: true
     engines:
       node: '>=10.4'
     peerDependencies:
-      '@prisma/cli': '*'
+      prisma: '>=2.15.0'
     peerDependenciesMeta:
-      '@prisma/cli':
+      prisma:
         optional: true
     requiresBuild: true
     resolution:
-      integrity: sha512-3j4OoLpAGF104KAenUFJM9sU2+4jRP+RlrlYssBHkwBf+/5+2ihSpcmFiWIw1vXNRdmZtivjwhjcVtmjZPJktw==
-  /@prisma/engines-version/2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54:
+      integrity: sha512-q02/IKwUIN+9Kl+Oayfb6x38NQ4ROvLoPSE+V0DRlJehTAJoxgRUWuPwaiOkksVnnmK4XHvKS/TR5EmQHUVxYw==
+  /@prisma/engines-version/2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1:
     dev: true
     resolution:
-      integrity: sha512-KDxk7Zsc9tDoShCE7v+O1SnCUTUkMdfezjbuz9CBvdEBGMtYLgyHaZAO8M038uqy8KjgwV9PzyoLqvVfzfsngg==
-  /@prisma/engines/2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54:
+      integrity: sha512-/gcqWJDXoo0vsYi7fhdhdyjfMXxJPjKl8K7oc/k2BH7IQuXUB1A+ZnFgqRcT/rKuyU4xH8+N+l+C4boWlqYvgQ==
+  /@prisma/engines/2.16.0-43.a973e24a4e5194f8fe3301bfa7ff982b24f97c05:
     dev: true
     requiresBuild: true
     resolution:
-      integrity: sha512-AgPxAWtwYhhTNEEsV4lK63HTe9z0GAGL3ofMr2B0TncACmzi9lhdun9TTNie38Oy/3DLfr71TUHKUpV8QjOKUw==
+      integrity: sha512-vwZhfa/w+2mzoKMquCogpegLKuZnu/RmhVMDUYxuSSw8o+tjanYpuvJYImioDZ+FoU1vTawxqMc4kfD1yKYRlA==
   /@sideway/address/4.1.0:
     dependencies:
       '@hapi/hoek': 9.1.1
@@ -315,7 +315,7 @@ packages:
     dev: false
     resolution:
       integrity: sha1-rqdNXmHB+JlhO/ZL2mbUx48v0X0=
-  /aws-sdk/2.834.0:
+  /aws-sdk/2.835.0:
     dependencies:
       buffer: 4.9.2
       events: 1.1.1
@@ -330,7 +330,7 @@ packages:
     engines:
       node: '>= 0.8.0'
     resolution:
-      integrity: sha512-9WRULrn4qAmgXI+tEW/IG5s/6ixJGZqjPOrmJsFZQev7/WRkxAZmJAjcwd4Ifm/jsJbXx2FSwO76gOPEvu2LqA==
+      integrity: sha512-codVDhqE6PD4P7m5j8T0o4jer2Gt/oy+QqU+0BhzeuH/ryT+03YJDw8mXlfMWlhQ+6ZQBMZ3+YT69/85VgR6IQ==
   /balanced-match/1.0.0:
     resolution:
       integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
@@ -1341,6 +1341,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+  /oauth/0.9.15:
+    dev: false
+    resolution:
+      integrity: sha1-vR/vr2hslrdUda7VGWQS/2DPucE=
   /object-assign/4.1.1:
     dev: false
     engines:
@@ -1390,6 +1394,31 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
+  /passport-oauth1/1.1.0:
+    dependencies:
+      oauth: 0.9.15
+      passport-strategy: 1.0.0
+      utils-merge: 1.0.1
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-p96YiiEfnPRoc3cTDqdN8ycwyRg=
+  /passport-strategy/1.0.0:
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
+  /passport-twitter/1.0.4:
+    dependencies:
+      passport-oauth1: 1.1.0
+      xtraverse: 0.1.0
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-AaeZ4fdgvy3knyul+6MigvGJMtc=
   /path-to-regexp/0.1.7:
     dev: false
     resolution:
@@ -1958,12 +1987,26 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha1-Ey7mPS7FVlxVfiD0wi35rKaGsQ0=
+  /xmldom/0.1.31:
+    dev: false
+    engines:
+      node: '>=0.1'
+    resolution:
+      integrity: sha512-yS2uJflVQs6n+CyjHoaBmVSqIDevTAWrzMmjG1Gc7h1qQ7uVozNhEPJAwZXWyGQ/Gafo3fCwrcaokezLPupVyQ==
   /xtend/4.0.2:
     dev: false
     engines:
       node: '>=0.4'
     resolution:
       integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
+  /xtraverse/0.1.0:
+    dependencies:
+      xmldom: 0.1.31
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-t0G60BjveNip0ug63gB7P3lZxzI=
   /yn/3.1.1:
     dev: true
     engines:
@@ -2005,6 +2048,7 @@ specifiers:
   morgan: ^1.10.0
   multer: ^1.4.2
   nodemon: ^2.0.7
+  passport-twitter: ^1.0.4
   redis: ^3.0.2
   ts-node: ^9.1.1
   tsconfig-paths: ^3.9.0
