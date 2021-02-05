@@ -1,3 +1,5 @@
+import passport, { Profile } from "passport";
+import { Strategy as TwitterStrategy } from "passport-twitter";
 import { v4 as uuid } from "uuid";
 import fs from "fs";
 import multer from "multer";
@@ -6,8 +8,99 @@ import { Router } from "express";
 import { prisma } from "../prisma";
 import { Request, Response, NextFunction } from "express";
 import { matchPassword } from "../libs/password";
+// import passport from "passport";
 
-import { handleSuccessfulLogin, passport } from '../passport'
+passport.use(
+	new TwitterStrategy(
+		{
+			consumerKey: process.env.TWITTER_CONSUMER_KEY,
+			consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+		},
+		async (accessToken, refreshToken, profile, cb) => {
+			const user = await getUserByProviderProfile(
+				accessToken,
+				refreshToken,
+				profile,
+				"twitter"
+			);
+			cb(null, user);
+		}
+	)
+);
+
+async function getUserByProviderProfile(
+	accessToken: string,
+	refreshToken: string,
+	profile: Profile,
+	provider: "github" | "google" | "twitter"
+) {
+	// const email = profile.emails[0].value;
+	const avatar = profile.photos[0].value;
+
+	let oauthExisting;
+	let userExisting;
+
+	function createOAuthProfile(userId: string) {
+		return prisma.oauth.create({
+			data: {
+				user: {
+					connect: {
+						id: userId,
+					},
+				},
+				provider,
+				oauth_user_id: profile.id,
+			},
+		});
+	}
+
+	oauthExisting = await prisma.oauth.findUnique({
+		where: {
+			oauth_user_id: profile.id,
+		},
+	});
+	if (oauthExisting) {
+		userExisting = await prisma.user.findUnique({
+			where: {
+				id: oauthExisting.user_id,
+			},
+		});
+	}
+
+	// If not found, create user and save oauth user id
+	if (!userExisting) {
+		userExisting = await prisma.user.create({
+			data: {
+				display_name: profile.displayName || profile.username,
+				profile: {
+					create: {
+						bio: "Hello BBS",
+						icon_url: avatar,
+					},
+				},
+			},
+		});
+		oauthExisting = await createOAuthProfile(userExisting.id);
+	}
+
+	// update token
+	if (
+		accessToken !== oauthExisting.access_token ||
+		refreshToken !== oauthExisting.refresh_token
+	) {
+		await prisma.oauth.update({
+			where: {
+				id: oauthExisting.id,
+			},
+			data: {
+				access_token: accessToken,
+				refresh_token: refreshToken,
+			},
+		});
+	}
+
+	return userExisting;
+}
 
 const isAuth = (req: any, res: any, next: any) => {
 	// console.log(req.session);
@@ -50,6 +143,15 @@ router.get("/", async (req, res, next) => {
 
 	res.render("index", { posts, isLogin, userId });
 });
+
+router.get("/auth/twitter", passport.authenticate("twitter"));
+router.get(
+	"/oauth/twitter/callback",
+	passport.authenticate("twitter", {
+		successRedirect: "/",
+		failureRedirect: "/login",
+	})
+);
 
 router.get("/signup", async (req, res, next) => {
 	res.render("signup");

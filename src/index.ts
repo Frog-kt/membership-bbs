@@ -16,7 +16,7 @@ app.set("trust proxy", 1);
 
 const RedisStore = connectRedis(session);
 const redisClient = redis.createClient({
-	host: "redis",
+	host: "localhost",
 	port: 6379,
 });
 
