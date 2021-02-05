@@ -9,6 +9,7 @@ import cors from "cors";
 import redis from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
+import passport from "passport";
 
 const app = express();
 
@@ -28,6 +29,7 @@ redisClient.on("connect", function (err) {
 });
 
 app.use([
+	passport.initialize(),
 	cors(),
 	rateLimit({ windowMs: 10 * 60 * 1000, max: 100 }),
 	bodyParser.json(),
@@ -36,7 +38,7 @@ app.use([
 	helmet.contentSecurityPolicy({
 		directives: {
 			"default-src": ["'self'"],
-			"img-src": ["'self'", "bbs-image.s3.amazonaws.com"],
+			"img-src": ["'self'", "bbs-image.s3.amazonaws.com", "pbs.twimg.com"],
 		},
 	}),
 	hpp(),

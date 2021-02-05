@@ -9,12 +9,33 @@ import { prisma } from "../prisma";
 import { Request, Response, NextFunction } from "express";
 import { matchPassword } from "../libs/password";
 // import passport from "passport";
+import { ModelUser } from "../db.types";
+
+passport.serializeUser<string>((user: ModelUser, done) => {
+	done(null, user.id);
+});
+
+passport.deserializeUser<string>((id, done) => {
+	prisma.user
+		.findUnique({
+			where: {
+				id,
+			},
+		})
+		.then((user) => {
+			done(null, user);
+		})
+		.catch((error) => {
+			console.log(`Error: ${error}`);
+		});
+});
 
 passport.use(
 	new TwitterStrategy(
 		{
 			consumerKey: process.env.TWITTER_CONSUMER_KEY,
 			consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+			callbackURL: "http://localhost:3000/oauth/twitter/callback",
 		},
 		async (accessToken, refreshToken, profile, cb) => {
 			const user = await getUserByProviderProfile(
@@ -148,9 +169,18 @@ router.get("/auth/twitter", passport.authenticate("twitter"));
 router.get(
 	"/oauth/twitter/callback",
 	passport.authenticate("twitter", {
-		successRedirect: "/",
-		failureRedirect: "/login",
-	})
+		failureRedirect: "/signup",
+	}),
+	async (req, res, next) => {
+		const { id } = (req as any).user;
+		const user = await prisma.user.findUnique({
+			where: { id },
+		});
+		delete user.password;
+		req.session.user = user;
+		console.log(req.session.user);
+		res.redirect("/");
+	}
 );
 
 router.get("/signup", async (req, res, next) => {
