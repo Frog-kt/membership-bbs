@@ -7,6 +7,8 @@ import { prisma } from "../prisma";
 import { Request, Response, NextFunction } from "express";
 import { matchPassword } from "../libs/password";
 
+import { handleSuccessfulLogin, passport } from '../passport'
+
 const isAuth = (req: any, res: any, next: any) => {
 	// console.log(req.session);
 	if (req.session.user.id) {
