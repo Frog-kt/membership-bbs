@@ -11,12 +11,13 @@ generator client {
 model user {
   id           String   @id @default(cuid())
   display_name String
-  login_name   String   @unique
-  password     String
+  login_name   String?  @unique
+  password     String?
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
   profile      profile?
   post         post[]
+  oauth        oauth[]
 }
 
 // ユーザープロフィール
@@ -36,4 +37,16 @@ model post {
   user_id    String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+}
+
+model oauth {
+  id            String   @id @default(cuid())
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  provider      String
+  access_token  String?
+  refresh_token String?
+  oauth_user_id String   @unique
+  user          user     @relation(fields: [user_id], references: [id])
+  user_id       String
 }
