@@ -14,6 +14,7 @@
   <!-- コードから渡されたデータを表示-->
   <% if (isLogin) { %>
   <!-- true -->
+  <button><a href="/logout">ログアウト</a></button>
   <h2>投稿</h2>
   <form action="/post" method="post">
     <textarea rows="3" cols="70" name="content" placeholder="投稿する内容を入力してください"></textarea>

@@ -1,5 +1,4 @@
 import express from "express";
-import router from "./router";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
@@ -10,6 +9,9 @@ import redis from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
 import passport from "passport";
+import authRouter from "./router/auth";
+import userRouter from "./router/user";
+import postRouter from "./router/post";
 
 const app = express();
 
@@ -66,7 +68,9 @@ app.use([
 
 app.set("view engine", "ejs");
 
-app.use("/", router);
+app.use("/", authRouter);
+app.use("/", userRouter);
+app.use("/", postRouter);
 
 app.listen(3000, () => {
 	console.log("Server running");

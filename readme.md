@@ -7,11 +7,13 @@
 - 新規ユーザー登録
 - ログイン
 - ログアウト
+- Twitter認証
 - マイページ
 - プロフィールページ
 - 自分のプロフィールの編集
 - 掲示板の表示
 - 掲示板への投稿
+- 投稿の横にアイコン表示
 
 ## 使用技術一覧
 
@@ -20,8 +22,14 @@
 - postgreSQL の使用
 - docker-compose の使用(redis, nginx, node, postgreSQL)
 
-## 使い方
+# リンク
 
-1. ```docker-compose up```
+トップ http://ec2-3-86-254-116.compute-1.amazonaws.com/
 
-2. access to http://localhost/
+新規登録 http://ec2-3-86-254-116.compute-1.amazonaws.com/signup
+
+ログイン http://ec2-3-86-254-116.compute-1.amazonaws.com/login
+
+マイページ http://ec2-3-86-254-116.compute-1.amazonaws.com/user/profile/:user_id
+
+プロフィール編集 http://ec2-3-86-254-116.compute-1.amazonaws.com/user/profile
