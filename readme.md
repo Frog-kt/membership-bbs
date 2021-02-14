@@ -1,7 +1,7 @@
 # 会員制 Web 掲示板サービス
 
 # 製作物概要
-http://ec2-3-86-254-116.compute-1.amazonaws.com/
+http://ec2-3-86-254-116.compute-1.amazonaws.com/ (リンク切れ)
 
 ## 機能一覧
 
