@@ -1,31 +1,31 @@
 version: "3"
 services:
-  # nginx
-  web:
-    build:
-      context: ./docker/web
-      dockerfile: Dockerfile
-    image: nginx
-    container_name: nginx
-    ports:
-      - 80:80
+  # # nginx
+  # web:
+  #   build:
+  #     context: ./docker/web
+  #     dockerfile: Dockerfile
+  #   image: nginx
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
 
-  # アプリケーション
-  app:
-    build:
-      context: ./docker/app
-      dockerfile: Dockerfile
-    image: node-app
-    container_name: node-app
-    ports:
-      - 3000:3000
-    volumes:
-      - "./:/src"
-      - hoge:/app/node_modules
-    tty: true
-    stdin_open: true
-    environment:
-      CHOKIDAR_USEPOLLING: 1
+  # # アプリケーション
+  # app:
+  #   build:
+  #     context: ./docker/app
+  #     dockerfile: Dockerfile
+  #   image: node-app
+  #   container_name: node-app
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - "./:/src"
+  #     - hoge:/app/node_modules
+  #   tty: true
+  #   stdin_open: true
+  #   environment:
+  #     CHOKIDAR_USEPOLLING: 1
 
   # セッションストレージ
   redis:
